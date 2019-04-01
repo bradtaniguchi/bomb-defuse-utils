@@ -3,20 +3,20 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 @Component({
   selector: 'app-header',
   template: `
-    <header fxLayout="row" fxFlex>
-      <a routerLink="/" class="header">Bomb Defuse Utils</a>
-      <nav role="navigation">
-        <a routerLink="search">Search</a>
-        <a>Manual</a>
-        <button routerLink="utils">Utils</button>
+    <header fxLayout="row" fxLayoutAlign="end">
+      <a routerLink="/" class="title" fxFlex="30">Bomb Defuse Utils</a>
+      <nav role="navigation" fxLayout="row" fxLayoutAlign="center">
+        <a class="app-button" routerLink="search">Search</a>
+        <a class="app-button" routerLink="manual">Manual</a>
+        <a class="app-button" routerLink="utils">Utils</a>
       </nav>
+      <span fxFlex></span>
     </header>
   `,
   styles: [
     `
-      header {
-        height: 32px;
-        min-height: 32px;
+      .title {
+        margin: 8px;
       }
     `
   ],

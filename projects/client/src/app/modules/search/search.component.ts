@@ -4,12 +4,20 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   selector: 'app-search',
   template: `
     <main>
-      <p>
-        search works!
-      </p>
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <label for="search">Search Utils:</label>
+          <input type="search" id="search" name="search" class="search-box" />
+        </div>
+      </div>
     </main>
   `,
-  styles: [],
+  styles: [
+    `
+      .search-box {
+      }
+    `
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent implements OnInit {
