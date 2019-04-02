@@ -1,4 +1,22 @@
 .app-button {
+  // outline: none;
+  // background: inherit;
+  // border: none;
+  // font-family: inherit;
+  // cursor: pointer;
+  font-size: 16px;
+  margin: 8px;
+  padding: 6px;
+}
+
+.app-button:hover {
+  // border: 2px solid black;
+  // border-radius: 12px;
+  // padding: 4px;
+}
+
+
+button {
   outline: none;
   background: inherit;
   border: none;
@@ -7,10 +25,4 @@
   font-size: 16px;
   margin: 8px;
   padding: 6px;
-}
-
-.app-button:hover {
-  border: 2px solid black;
-  border-radius: 12px;
-  padding: 4px;
 }
