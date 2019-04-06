@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { WireColor } from '../../models/wire';
+import { logger } from '../../logger';
 
 @Injectable({
   providedIn: 'root'
@@ -83,10 +84,12 @@ export class WiresService {
     wires: WireColor[],
     isSerialOdd?: boolean
   ): number {
+    logger.log('not ready');
     return 0;
   }
 
   private getWireToCutOfSix(wires: WireColor[], isSerialOdd?: boolean): number {
+    logger.log('not ready');
     return 0;
   }
 }
