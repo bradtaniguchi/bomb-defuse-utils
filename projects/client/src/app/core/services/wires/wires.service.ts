@@ -71,8 +71,12 @@ export class WiresService {
     if (lastIsYellow && noRedWires) {
       return 0;
     }
-    // TODO
-    return 0;
+    const moreThanOneYellow =
+      wires.filter(wire => wire === 'yellow').length > 1;
+    if (moreThanOneYellow) {
+      return 4;
+    }
+    return 2;
   }
 
   private getWireToCutOfFive(

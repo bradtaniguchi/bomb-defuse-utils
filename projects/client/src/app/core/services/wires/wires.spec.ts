@@ -32,5 +32,13 @@ describe('wires', () => {
         0
       );
     });
+    test('if there is more than one yellow wire, cut the last wire.', () => {
+      expect(wires.getWireToCut(['white', 'yellow', 'yellow', 'red'])).toEqual(
+        4
+      );
+    });
+    test('by default return 2', () => {
+      expect(wires.getWireToCut(['white', 'yellow', 'blue', 'red'])).toEqual(2);
+    });
   });
 });
