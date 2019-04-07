@@ -67,7 +67,15 @@ export class WiresService {
     if (noRedWires) {
       return 2;
     }
-    // logically we can just cut the last one..
+    const isLastWhite = wires[wires.length - 1] === 'white';
+    if (isLastWhite) {
+      return last;
+    }
+    const multiBlue = wires.filter(wire => wire === 'blue').length > 1;
+    if (multiBlue) {
+      const lastBlueIndex = wires.reverse().findIndex(wire => wire === 'blue');
+      return wires.length - lastBlueIndex;
+    }
     return last;
   }
 

@@ -13,6 +13,8 @@ describe('wires', () => {
 
     test('if there is more than one blue wire, cut the last blue wire', () => {
       expect(wires.getWireToCut(['red', 'blue', 'blue'])).toEqual(3);
+      expect(wires.getWireToCut(['blue', 'blue', 'red'])).toEqual(2);
+      expect(wires.getWireToCut(['blue', 'red', 'blue'])).toEqual(3);
     });
   });
 
