@@ -72,4 +72,30 @@ describe('wires', () => {
       ).toEqual(1);
     });
   });
+
+  describe('six wires', () => {
+    test('If there are no yellow wires and the last digit of the serial number is odd, cut the third wire.', () => {
+      expect(
+        wires.getWireToCut(['red', 'red', 'red', 'red', 'red', 'red'], true)
+      ).toEqual(3);
+    });
+    test('if there is exactly one yellow wire and there is more than one white wire, cut the fourth wire.', () => {
+      expect(
+        wires.getWireToCut(
+          ['yellow', 'white', 'white', 'red', 'red', 'red'],
+          true
+        )
+      ).toEqual(4);
+    });
+    test('if there are no red wires, cut the last wire.', () => {
+      expect(
+        wires.getWireToCut(['blue', 'blue', 'blue', 'blue', 'blue', 'blue'])
+      ).toEqual(6);
+    });
+    test('otherwise cut the fourth wire', () => {
+      expect(
+        wires.getWireToCut(['red', 'blue', 'blue', 'blue', 'blue', 'blue'])
+      ).toEqual(4);
+    });
+  });
 });
