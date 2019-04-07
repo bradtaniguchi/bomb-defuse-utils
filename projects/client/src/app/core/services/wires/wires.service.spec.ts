@@ -18,7 +18,7 @@ describe('wires', () => {
     });
   });
 
-  fdescribe('four wires', () => {
+  describe('four wires', () => {
     test('If there is more than one red wire and the last digit of the serial number is odd, cut the last red wire.', () => {
       expect(wires.getWireToCut(['red', 'white', 'red', 'red'], true)).toEqual(
         4
