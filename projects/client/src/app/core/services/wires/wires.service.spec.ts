@@ -18,20 +18,26 @@ describe('wires', () => {
     });
   });
 
-  describe('four wires', () => {
+  fdescribe('four wires', () => {
     test('If there is more than one red wire and the last digit of the serial number is odd, cut the last red wire.', () => {
       expect(wires.getWireToCut(['red', 'white', 'red', 'red'], true)).toEqual(
         4
       );
+      expect(wires.getWireToCut(['red', 'white', 'red', 'blue'], true)).toEqual(
+        3
+      );
+      expect(wires.getWireToCut(['red', 'red', 'white', 'blue'], true)).toEqual(
+        2
+      );
     });
     test('if the last wire is yellow and there are no red wires, cut the first wire.', () => {
       expect(wires.getWireToCut(['white', 'white', 'white', 'yellow'])).toEqual(
-        0
+        1
       );
     });
     test('if there is exactly one blue wire, cut the first wire.', () => {
       expect(wires.getWireToCut(['blue', 'white', 'yellow', 'black'])).toEqual(
-        0
+        1
       );
     });
     test('if there is more than one yellow wire, cut the last wire.', () => {
@@ -40,7 +46,7 @@ describe('wires', () => {
       );
     });
     test('by default return 2', () => {
-      expect(wires.getWireToCut(['white', 'yellow', 'blue', 'red'])).toEqual(2);
+      expect(wires.getWireToCut(['white', 'yellow', 'red', 'red'])).toEqual(2);
     });
   });
 });

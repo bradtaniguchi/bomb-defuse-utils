@@ -94,12 +94,17 @@ export class WiresService {
     const redWires = wires.filter(wire => wire === 'red');
     const multiRedWires = redWires.length > 1;
     if (multiRedWires && isSerialOdd) {
-      return wires.length;
+      const lastRedIndex = wires.reverse().findIndex(wire => wire === 'red');
+      return wires.length - lastRedIndex;
     }
     const noRedWires = redWires.length === 0;
     const lastIsYellow = wires[wires.length - 1] === 'yellow';
     if (lastIsYellow && noRedWires) {
-      return 0;
+      return 1;
+    }
+    const isSingleBlue = wires.filter(wire => wire === 'blue').length === 1;
+    if (isSingleBlue) {
+      return 1;
     }
     const moreThanOneYellow =
       wires.filter(wire => wire === 'yellow').length > 1;
@@ -109,6 +114,13 @@ export class WiresService {
     return 2;
   }
 
+  /**
+   *
+   * If the last wire is black and the last digit of the serial number is odd, cut the fourth wire.
+   * Otherwise, if there is exactly one red wire and there is more than one yellow wire, cut the first wire.
+   * Otherwise, if there are no black wires, cut the second wire.
+   * Otherwise, cut the first wire.
+   */
   private getWireToCutOfFive(
     wires: WireColor[],
     isSerialOdd?: boolean
