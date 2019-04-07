@@ -126,7 +126,20 @@ export class WiresService {
     isSerialOdd?: boolean
   ): number {
     logger.log('not ready');
-    return 0;
+    const lastIsBlack = wires[wires.length - 1] === 'black';
+    if (lastIsBlack && isSerialOdd) {
+      return 4;
+    }
+    const isOneRed = wires.filter(wire => wire === 'red').length === 1;
+    const multiYellow = wires.filter(wire => wire === 'yellow').length > 1;
+    if (isOneRed && multiYellow) {
+      return 1;
+    }
+    const noBlack = !!wires.find(wire => wire === 'black');
+    if (!noBlack) {
+      return 2;
+    }
+    return 1;
   }
 
   private getWireToCutOfSix(wires: WireColor[], isSerialOdd?: boolean): number {
