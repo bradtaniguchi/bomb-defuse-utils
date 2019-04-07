@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { WiresRoutingModule } from './wires-routing.module';
 import { WiresComponent } from './wires.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MiddleLayoutModule } from '../../shared/middle-layout/middle-layout.module';
 import { FormFieldModule } from '../../shared/form-field/form-field.module';
 
@@ -13,6 +13,7 @@ import { FormFieldModule } from '../../shared/form-field/form-field.module';
     CommonModule,
     WiresRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     MiddleLayoutModule,
     FormFieldModule
   ]

@@ -9,6 +9,27 @@ export class WiresService {
   constructor() {}
 
   /**
+   * Returns if we need to ask for the oddSerial, based upon the current wires.
+   */
+  public needIsSerialOdd(wires: WireColor[]): boolean {
+    switch (WiresService.length) {
+      case 3:
+        return false;
+      case 4:
+        // If there is more than one red wire and the last digit of the serial number is odd, cut the last red wire.
+        return wires.filter(wire => wire === 'red').length > 1;
+      case 5:
+        // If the last wire is black and the last digit of the serial number is odd, cut the fourth wire.
+        return wires[wires.length - 1] === 'black';
+      case 6:
+        // If there are no yellow wires and the last digit of the serial number is odd, cut the third wire.
+        return wires.filter(wire => wire === 'yellow').length === 0;
+      default:
+        return false;
+    }
+  }
+
+  /**
    * Returns what wire to cut
    * @param wires the list of wires from top to bottom
    * @param isSerialOdd if the serial is odd, if not given it is assumed

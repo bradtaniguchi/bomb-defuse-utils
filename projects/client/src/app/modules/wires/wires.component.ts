@@ -2,53 +2,75 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { WireColor } from '../../core/models/wire';
 import { logger } from '../../core/logger';
 import { WiresService } from '../../core/services/wires/wires.service';
-
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { Observable, combineLatest } from 'rxjs';
+import { map, tap, startWith } from 'rxjs/operators';
 @Component({
   selector: 'app-wires',
   template: `
-    <app-middle-layout>
-      <app-form-field>
-        <label for="wires">How many wires?</label>
-        <div fxLayout="row">
+    <form [formGroup]="form" novalidate>
+      <app-middle-layout>
+        <app-form-field>
+          <label for="wires">1. How many wires? (3-6)</label>
           <input
             type="number"
             appFormInput
-            [(ngModel)]="numWires"
-            (ngModelChange)="onWiresChange()"
+            formControlName="num"
             min="3"
             max="6"
           />
+          <div style="color: red" *ngIf="form.get('num').hasError('min')">
+            Value is too small
+          </div>
+          <div style="color: red" *ngIf="form.get('num').hasError('max')">
+            Value is too large
+          </div>
+        </app-form-field>
+        <div class="margin full-width">
+          <ng-container *ngIf="(showSecondQuestions$ | async)">
+            <app-form-field
+              *ngFor="
+                let control of form.get('wires').controls;
+                let index = index
+              "
+            >
+              <label for="wires">Wire: {{ index + 1 }}</label>
+              <select appFormInput [formControl]="control">
+                <option *ngFor="let wire of wireOptions" [value]="wire">{{
+                  wire
+                }}</option>
+              </select>
+            </app-form-field>
+          </ng-container>
         </div>
-      </app-form-field>
-      <!-- <app-form-field *ngIf="showSerial">
-        <label for="wires">Is Serial Odd</label>
-        <div fxLayout="row">
-          <select>
-            <option [value]="">
+        <app-form-field *ngIf="(showSecondQuestions$ | async)">
+          <label for="wires">2. Is Serial Odd</label>
+          <select type="select" appFormInput formControlName="isSerialOdd">
+            <option [value]="true">True</option>
+            <option [value]="true">False</option>
           </select>
-        </div>
-      </app-form-field> -->
-      <div class="margin" style="width: 50%">
-        <ng-container *ngIf="numWires">
-          <app-form-field *ngFor="let wire of wires; let index = index">
-            <label for="wires">Wire: {{ index + 1 }}</label>
-            <select type="select" [(ngModel)]="wire" appFormInput>
-              <option *ngFor="let wire of wireOptions">{{ wire }}</option>
-            </select>
-          </app-form-field>
+          <div *ngIf="(dontUseSerial$ | async); else showNeedSerial">
+            Disregard this input for this listing of wires!
+          </div>
+          <ng-template #showNeedSerial>
+            This is required!
+          </ng-template>
+        </app-form-field>
+        <pre>
+          {{ form.value | json }}
+        </pre
+        >
+        <ng-container *ngIf="(showSecondQuestions$ | async)">
+          Cut Wire: {{ wireToCut$ | async }}
         </ng-container>
-      </div>
-      <ng-container *ngIf="numWires">
-        Cut Wire: {{ getCutWire() }}
-      </ng-container>
-    </app-middle-layout>
+      </app-middle-layout>
+    </form>
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WiresComponent implements OnInit {
-  public wires: WireColor[];
-  public numWires: number;
+  public form: FormGroup;
   public readonly wireOptions: WireColor[] = [
     'black',
     'blue',
@@ -56,17 +78,63 @@ export class WiresComponent implements OnInit {
     'white',
     'yellow'
   ];
-  constructor(private wiresService: WiresService) {}
+  public wireToCut$: Observable<number>;
+  public dontUseSerial$: Observable<boolean>;
+  public showSecondQuestions$: Observable<boolean>;
+  constructor(private fb: FormBuilder, private wiresService: WiresService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.form = this.buildForm();
+    this.form.get('num').valueChanges.subscribe(() => this.onWiresChange());
+    this.wireToCut$ = this.observeWireToCut();
+    this.showSecondQuestions$ = this.observeSecondQuestions();
+    this.dontUseSerial$ = this.observeDontUseSerial();
+  }
 
-  onWiresChange() {
-    if (this.numWires >= 3 && this.numWires <= 6) {
-      this.wires = new Array(this.numWires).fill('blue' as WireColor);
+  private buildForm(): FormGroup {
+    return this.fb.group({
+      num: this.fb.control(null, [Validators.min(3), Validators.max(6)]),
+      wires: this.fb.array([]),
+      isSerialOdd: this.fb.control(false)
+    });
+  }
+
+  private observeSecondQuestions(): Observable<boolean> {
+    return this.form
+      .get('num')
+      .valueChanges.pipe(map(numOfWires => !!numOfWires));
+  }
+
+  private observeDontUseSerial(): Observable<boolean> {
+    return this.form
+      .get('wires')
+      .valueChanges.pipe(
+        map(wires => !this.wiresService.needIsSerialOdd(wires))
+      );
+  }
+
+  private onWiresChange() {
+    const num = this.form.get('num').value;
+    if (num >= 3 && num <= 6) {
+      const controls = new Array(num)
+        .fill(null)
+        .map(() => this.fb.control('white' as WireColor));
+      const formArray = this.form.get('wires') as FormArray;
+      while (formArray.length !== 0) {
+        formArray.removeAt(0);
+      }
+      controls.forEach(control => formArray.push(control));
     }
   }
 
-  getCutWire(): number {
-    return this.wiresService.getWireToCut(this.wires);
+  private observeWireToCut(): Observable<number> {
+    return combineLatest(
+      this.form.get('wires').valueChanges,
+      this.form.get('isSerialOdd').valueChanges.pipe(startWith(false))
+    ).pipe(
+      map(([wires, isSerialOdd]: [WireColor[], boolean]) =>
+        this.wiresService.getWireToCut(wires, isSerialOdd)
+      )
+    );
   }
 }
