@@ -1,11 +1,15 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Form } from '@angular/forms';
+import { Form, FormGroup, FormBuilder } from '@angular/forms';
+import { SearchRoutes } from '../../app-routing.module';
+import { Observable } from 'rxjs';
+import { map, debounceTime } from 'rxjs/operators';
+import { SearchService } from '../../core/services/search/search.service';
 
 @Component({
   selector: 'app-search',
   template: `
     <main>
-      <form novalidate #form="ngForm" (submit)="onSubmit(form)">
+      <form novalidate [formGroup]="form" (submit)="onSubmit(form)">
         <div fxLayout="column" fxLayoutAlign="center center">
           <div
             fxLayout="column"
@@ -18,14 +22,19 @@ import { Form } from '@angular/forms';
                 type="text"
                 id="search"
                 name="search"
-                [(ngModel)]="search"
-                #_search="ngModel"
+                formControlName="search"
+                autocomplete="off"
                 class="search-box full-width"
               />
-              <button type="button">
+              <button>
                 Search
               </button>
             </div>
+          </div>
+        </div>
+        <div fxLayout="column">
+          <div *ngFor="let result of (results$ | async)">
+            <a [routerLink]="['../', result.path]">{{ result.title }}</a>
           </div>
         </div>
       </form>
@@ -35,10 +44,28 @@ import { Form } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent implements OnInit {
+  public form: FormGroup;
   public search: string;
-  constructor() {}
+  public results$: Observable<SearchRoutes>;
+  constructor(private fb: FormBuilder, private searchService: SearchService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.form = this.buildForm();
+    this.results$ = this.observeResults(this.form);
+  }
+
+  private buildForm(): FormGroup {
+    return this.fb.group({
+      search: this.fb.control('', [])
+    });
+  }
+
+  private observeResults(form: FormGroup): Observable<SearchRoutes> {
+    return form.get('search').valueChanges.pipe(
+      debounceTime(100),
+      map(search => this.searchService.search(search))
+    );
+  }
   public onSubmit(form: Form) {
     console.log('test in form:', form);
   }
