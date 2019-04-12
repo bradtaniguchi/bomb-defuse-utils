@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { combineLatest, Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { WireColor } from '../../core/models/wire';
-import { logger } from '../../core/logger';
 import { WiresService } from '../../core/services/wires/wires.service';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { Observable, combineLatest } from 'rxjs';
-import { map, tap, startWith } from 'rxjs/operators';
 @Component({
   selector: 'app-wires',
   template: `

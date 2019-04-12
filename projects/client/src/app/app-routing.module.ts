@@ -15,6 +15,10 @@ const routes: Routes = [
     loadChildren: './modules/wires/wires.module#WiresModule'
   },
   {
+    path: 'passwords',
+    loadChildren: './modules/passwords/passwords.module#PasswordsModule'
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'search'

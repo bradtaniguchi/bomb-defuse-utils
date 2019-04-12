@@ -1,0 +1,41 @@
+/**
+ * List of all possible passwords for the "On the Subject of Passwords"
+ * section.
+ */
+export const POSSIBLE_PASSWORDS = [
+  'about',
+  'after',
+  'again',
+  'below',
+  'could',
+  'every',
+  'first',
+  'found',
+  'great',
+  'house',
+  'large',
+  'learn',
+  'never',
+  'other',
+  'place',
+  'plant',
+  'point',
+  'right',
+  'small',
+  'sound',
+  'spell',
+  'still',
+  'study',
+  'their',
+  'there',
+  'these',
+  'thing',
+  'think',
+  'three',
+  'water',
+  'where',
+  'which',
+  'world',
+  'would',
+  'write'
+];
