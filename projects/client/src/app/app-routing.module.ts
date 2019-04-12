@@ -35,14 +35,21 @@ export const routes: SearchRoutes = [
     tags: ['letters', 'words', 'dials', '5', 'five', 'grid', 'guess']
   },
   {
+    path: 'utils',
+    loadChildren: './modules/utils/utils.module#UtilsModule',
+    exclude: true
+  },
+  {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'search'
+    redirectTo: 'search',
+    exclude: true
   },
   {
     path: '**',
     pathMatch: 'full',
-    redirectTo: 'search'
+    redirectTo: 'search',
+    exclude: true
   }
 ];
 

@@ -55,10 +55,6 @@ import { WiresService } from '../../core/services/wires/wires.service';
             This is required!
           </ng-template>
         </app-form-field>
-        <pre>
-          {{ form.value | json }}
-        </pre
-        >
         <ng-container *ngIf="(showSecondQuestions$ | async)">
           Cut Wire: {{ wireToCut$ | async }}
         </ng-container>

@@ -6,9 +6,15 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
     <header fxLayout="row" fxLayoutAlign="end">
       <a routerLink="/" class="title" fxFlex="30">Bomb Defuse Utils</a>
       <nav role="navigation" fxLayout="row" fxLayoutAlign="center">
-        <a class="app-button" routerLink="search">Search</a>
-        <a class="app-button" routerLink="manual">Manual</a>
-        <a class="app-button" routerLink="utils">Utils</a>
+        <a class="app-button" routerLink="/search" routerLinkActive="active"
+          >Search</a
+        >
+        <a class="app-button" routerLink="/manual" routerLinkActive="active"
+          >Manual</a
+        >
+        <a class="app-button" routerLink="/utils" routerLinkActive="active"
+          >Utils</a
+        >
       </nav>
       <span fxFlex></span>
     </header>

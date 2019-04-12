@@ -1,0 +1,9 @@
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+
+  &.active {
+    text-decoration: underline;
+  }
+}
