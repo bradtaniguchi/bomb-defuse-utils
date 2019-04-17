@@ -34,8 +34,7 @@
             "assets": [
               "projects/client/src/favicon.ico",
               "projects/client/src/robots.txt",
-              "projects/client/src/assets",
-              "projects/client/src/manifest.json"
+              "projects/client/src/assets"
             ],
             "styles": [
               "projects/client/src/styles.scss"
@@ -62,9 +61,7 @@
                 "type": "initial",
                 "maximumWarning": "2mb",
                 "maximumError": "5mb"
-              }],
-              "serviceWorker": false,
-              "ngswConfigPath": "projects/client/ngsw-config.json"
+              }]
             }
           }
         },
