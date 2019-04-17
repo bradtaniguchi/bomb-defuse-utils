@@ -3,7 +3,46 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Client</title>
+  <title>Bomb Defuse Utils</title>
+  <meta name="description"
+        content="Web-app that provide some basic utilities to help with the game Keep Talking and Nobody Explodes">
+  <meta data-react-helmet="true"
+        property="og:image"
+        content="https://static.npmjs.com/338e4905a2684ca96e08c7780fc68412.png" />
+  <meta data-react-helmet="true"
+        name="theme-color"
+        content="#fff" />
+  <meta data-react-helmet="true"
+        name="description"
+        content="Web-app that provide some basic utilities to help with the game Keep Talking and Nobody Explodes" />
+  <meta data-react-helmet="true"
+        property="og:description"
+        content="Web-app that provide some basic utilities to help with the game Keep Talking and Nobody Explodes" />
+  <meta data-react-helmet="true"
+        property="og:title"
+        content="Bomb-Defuse-Utils" />
+  <meta data-react-helmet="true"
+        property="og:url"
+        content="https://www.github.com/bradtaniguchi/bomb-defuse-utils" />
+  <meta data-react-helmet="true"
+        property="og:site_name"
+        content="npm" />
+  <meta data-react-helmet="true"
+        name="keywords"
+        content="git,angular,github" />
+  <meta data-react-helmet="true"
+        name="twitter:card"
+        content="summary" />
+  <meta data-react-helmet="true"
+        name="twitter:url"
+        content="https://www.github.com/bradtaniguchi/bomb-defuse-utils" />
+  <meta data-react-helmet="true"
+        name="twitter:title"
+        content="npm: bomb-defuse-utils" />
+  <meta data-react-helmet="true"
+        name="twitter:description"
+        content="Web-app that provide some basic utilities to help with the game Keep Talking and Nobody Explodes" />
+
   <base href="/">
   <link href="https://fonts.googleapis.com/css?family=Special+Elite"
         rel="stylesheet">
@@ -12,10 +51,51 @@
   <link rel="icon"
         type="image/x-icon"
         href="favicon.ico">
+  <link rel="manifest"
+        href="manifest.json">
+  <meta name="theme-color"
+        content="#000000">
+  <style>
+    #loading-container {
+      margin-top: 50vh;
+      text-align: center;
+    }
+
+    #loading {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(0, 0, 0, .3);
+      border-radius: 50%;
+      border-top-color: #000;
+      animation: spin 1s ease-in-out infinite;
+      -webkit-animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    @-webkit-keyframes spin {
+      to {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+  </style>
 <link rel="stylesheet" href="styles.48b7106c238b0ce7494a.css"></head>
 
 <body>
-  <app-root></app-root>
-<script type="text/javascript" src="runtime.940c61eb0049fad02bc2.js"></script><script type="text/javascript" src="es2015-polyfills.6907e630faf5db229f06.js" nomodule></script><script type="text/javascript" src="polyfills.3dabaa198e9c66fc76b8.js"></script><script type="text/javascript" src="main.27da4b8663db76e1c5f7.js"></script></body>
+  <app-root>
+    <noscript>
+      This application requires Javascript, sorry!
+    </noscript>
+    <div id="loading-container">
+      <div id="loading"></div>
+    </div>
+  </app-root>
+<script type="text/javascript" src="runtime.29b2761870f4bc52a7f0.js"></script><script type="text/javascript" src="es2015-polyfills.6907e630faf5db229f06.js" nomodule></script><script type="text/javascript" src="polyfills.3dabaa198e9c66fc76b8.js"></script><script type="text/javascript" src="vendor.1ab31d84d33e048479d2.js"></script><script type="text/javascript" src="main.8d3babd534dfb6e53288.js"></script></body>
 
 </html>
