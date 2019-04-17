@@ -33,7 +33,9 @@
             "tsConfig": "projects/client/tsconfig.app.json",
             "assets": [
               "projects/client/src/favicon.ico",
-              "projects/client/src/assets"
+              "projects/client/src/robots.txt",
+              "projects/client/src/assets",
+              "projects/client/src/manifest.json"
             ],
             "styles": [
               "projects/client/src/styles.scss"
@@ -54,13 +56,15 @@
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
+              "vendorChunk": true,
               "buildOptimizer": true,
               "budgets": [{
                 "type": "initial",
                 "maximumWarning": "2mb",
                 "maximumError": "5mb"
-              }]
+              }],
+              "serviceWorker": false,
+              "ngswConfigPath": "projects/client/ngsw-config.json"
             }
           }
         },
@@ -94,6 +98,7 @@
             "scripts": [],
             "assets": [
               "projects/client/src/favicon.ico",
+              "projects/client/src/robots.txt",
               "projects/client/src/assets"
             ]
           }

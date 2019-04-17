@@ -9,7 +9,10 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
         <a class="app-button" routerLink="/search" routerLinkActive="active"
           >Search</a
         >
-        <a class="app-button" routerLink="/manual" routerLinkActive="active"
+        <a
+          class="app-button"
+          href="http://www.bombmanual.com/manual/1/html"
+          routerLinkActive="active"
           >Manual</a
         >
         <a class="app-button" routerLink="/utils" routerLinkActive="active"

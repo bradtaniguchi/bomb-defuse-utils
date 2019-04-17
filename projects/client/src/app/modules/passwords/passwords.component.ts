@@ -1,12 +1,18 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { logger } from '../../core/logger';
 import {
   Combination,
   PasswordsService
 } from '../../core/services/passwords/passwords.service';
-import { logger } from '../../core/logger';
 
 @Component({
   selector: 'app-passwords',
@@ -14,10 +20,7 @@ import { logger } from '../../core/logger';
     <form [formGroup]="form" novalidate>
       <app-middle-layout>
         <app-form-field
-          *ngFor="
-            let control of form.get('positions').controls;
-            let index = index
-          "
+          *ngFor="let control of getPasswordControls(); let index = index"
         >
           <label [for]="'position_' + index + 1"
             >Position {{ index + 1 }}</label
@@ -70,6 +73,10 @@ export class PasswordsComponent implements OnInit {
   ngOnInit() {
     this.form = this.buildForm();
     this.words$ = this.observeWords(this.form);
+  }
+
+  public getPasswordControls(): AbstractControl[] {
+    return (this.form.get('positions') as FormArray).controls;
   }
 
   private buildForm(): FormGroup {

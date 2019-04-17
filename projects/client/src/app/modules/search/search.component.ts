@@ -66,7 +66,8 @@ export class SearchComponent implements OnInit {
       map(search => this.searchService.search(search))
     );
   }
-  public onSubmit(form: Form) {
+  public onSubmit(form: FormGroup) {
     console.log('test in form:', form);
+    // TODO: "go-to" the first link shown, add later
   }
 }
