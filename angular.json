@@ -13,19 +13,20 @@
           "inlineTemplate": true,
           "inlineStyle": true,
           "changeDetection": "OnPush",
-          "spec": false
+          "skipTests": true
         },
         "@schematics/angular:directive": {
-          "spec": false
+          "skipTests": true
         },
         "@schematics/angular:service": {
-          "spec": false
+          "skipTests": true
         }
       },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/client",
             "index": "projects/client/src/index.html",
             "main": "projects/client/src/main.ts",
@@ -45,10 +46,12 @@
           "configurations": {
             "production": {
               "deployUrl": "bomb-defuse-utils/",
-              "fileReplacements": [{
-                "replace": "projects/client/src/environments/environment.ts",
-                "with": "projects/client/src/environments/environment.prod.ts"
-              }],
+              "fileReplacements": [
+                {
+                  "replace": "projects/client/src/environments/environment.ts",
+                  "with": "projects/client/src/environments/environment.prod.ts"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -58,11 +61,17 @@
               "extractLicenses": true,
               "vendorChunk": true,
               "buildOptimizer": true,
-              "budgets": [{
-                "type": "initial",
-                "maximumWarning": "2mb",
-                "maximumError": "5mb"
-              }]
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ]
             }
           }
         },
@@ -86,19 +95,7 @@
         "test": {
           "builder": "@angular-builders/jest:run",
           "options": {
-            "main": "projects/client/src/test.ts",
-            "polyfills": "projects/client/src/polyfills.ts",
-            "tsConfig": "projects/client/tsconfig.spec.json",
-            "karmaConfig": "projects/client/karma.conf.js",
-            "styles": [
-              "projects/client/src/styles.scss"
-            ],
-            "scripts": [],
-            "assets": [
-              "projects/client/src/favicon.ico",
-              "projects/client/src/robots.txt",
-              "projects/client/src/assets"
-            ]
+            "tsConfig": "tsconfig.spec.json"
           }
         },
         "lint": {
@@ -116,5 +113,8 @@
       }
     }
   },
-  "defaultProject": "client"
+  "defaultProject": "client",
+  "cli": {
+    "analytics": "5ef35801-23e5-44dd-8a8f-4db07a1d3139"
+  }
 }

@@ -13,30 +13,30 @@ export type SearchRoutes = SearchRoute[];
 export const routes: SearchRoutes = [
   {
     path: 'complex',
-    loadChildren: './modules/complex/complex.module#ComplexModule',
+    loadChildren: () => import('./modules/complex/complex.module').then(m => m.ComplexModule),
     title: 'On the Subject of Complicated Wires',
     tags: ['wires', 'star', 'LED', 'red', 'blue', 'vertical', 'cut', 'multiple']
   },
   {
     path: 'search',
-    loadChildren: './modules/search/search.module#SearchModule',
+    loadChildren: () => import('./modules/search/search.module').then(m => m.SearchModule),
     exclude: true
   },
   {
     path: 'wires',
-    loadChildren: './modules/wires/wires.module#WiresModule',
+    loadChildren: () => import('./modules/wires/wires.module').then(m => m.WiresModule),
     title: 'On the Subject of Wires',
     tags: ['wires', 'top', 'bottom', 'cut', 'one', '3', '4', '5', '6']
   },
   {
     path: 'passwords',
-    loadChildren: './modules/passwords/passwords.module#PasswordsModule',
+    loadChildren: () => import('./modules/passwords/passwords.module').then(m => m.PasswordsModule),
     title: 'On the Subject of Passwords',
     tags: ['letters', 'words', 'dials', '5', 'five', 'grid', 'guess']
   },
   {
     path: 'utils',
-    loadChildren: './modules/utils/utils.module#UtilsModule',
+    loadChildren: () => import('./modules/utils/utils.module').then(m => m.UtilsModule),
     exclude: true
   },
   {
