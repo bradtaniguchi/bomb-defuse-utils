@@ -9,6 +9,9 @@ import { WiresService } from '../../core/services/wires/wires.service';
   template: `
     <form [formGroup]="form" novalidate>
       <app-middle-layout>
+        <div class="margin">
+          <app-manual-link linkId="Wires"></app-manual-link>
+        </div>
         <app-form-field>
           <label for="wires">1. How many wires? (3-6)</label>
           <input
@@ -26,7 +29,7 @@ import { WiresService } from '../../core/services/wires/wires.service';
           </div>
         </app-form-field>
         <div class="margin full-width">
-          <ng-container *ngIf="(showSecondQuestions$ | async)">
+          <ng-container *ngIf="showSecondQuestions$ | async">
             <app-form-field
               *ngFor="
                 let control of form.get('wires').controls;
@@ -42,20 +45,20 @@ import { WiresService } from '../../core/services/wires/wires.service';
             </app-form-field>
           </ng-container>
         </div>
-        <app-form-field *ngIf="(showSecondQuestions$ | async)">
+        <app-form-field *ngIf="showSecondQuestions$ | async">
           <label for="wires">2. Is Serial Odd</label>
           <select type="select" appFormInput formControlName="isSerialOdd">
             <option [value]="true">True</option>
             <option [value]="true">False</option>
           </select>
-          <div *ngIf="(dontUseSerial$ | async); else showNeedSerial">
+          <div *ngIf="dontUseSerial$ | async; else showNeedSerial">
             Disregard this input for this listing of wires!
           </div>
           <ng-template #showNeedSerial>
             This is required!
           </ng-template>
         </app-form-field>
-        <ng-container *ngIf="(showSecondQuestions$ | async)">
+        <ng-container *ngIf="showSecondQuestions$ | async">
           Cut Wire: {{ wireToCut$ | async }}
         </ng-container>
       </app-middle-layout>

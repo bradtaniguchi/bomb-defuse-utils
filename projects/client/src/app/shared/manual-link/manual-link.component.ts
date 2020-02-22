@@ -12,7 +12,7 @@ import {
       [href]="'http://www.bombmanual.com/web/index.html#' + linkId"
       style="color: purple"
     >
-      Manual entry Online
+      Manual entry online (ctrl+click to open in new tab)
     </a>
   `,
   styles: [],

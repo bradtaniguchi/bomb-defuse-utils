@@ -22,7 +22,9 @@ type GeneralParams = WireParams & GlobalWireParams;
     <form [formGroup]="form" novalidate>
       <div>
         <app-middle-layout>
+        <div class="margin">
           <app-manual-link linkId="ComplicatedWires"></app-manual-link>
+        </div>
           <!-- other settings -->
           <app-form-field>
             <label for="showInstructionalInputs"

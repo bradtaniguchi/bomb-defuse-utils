@@ -18,6 +18,9 @@ import {
   selector: 'app-passwords',
   template: `
     <form [formGroup]="form" novalidate>
+      <div class="margin">
+        <app-manual-link linkId="Passwords"></app-manual-link>
+      </div>
       <app-middle-layout>
         <app-form-field
           *ngFor="let control of getPasswordControls(); let index = index"
@@ -37,15 +40,15 @@ import {
             Input is to large, limit is 5
           </div>
         </app-form-field>
-        <ng-container *ngIf="(words$ | async) as words">
+        <ng-container *ngIf="words$ | async as words">
           <div *ngIf="words.length === 0">
             <h3>No Words matching</h3>
           </div>
           <div *ngIf="words.length === 1">
-            <h3
-              >The word is:
-              <span style="text-decoration: underline">{{ words[0] }}</span></h3
-            >
+            <h3>
+              The word is:
+              <span style="text-decoration: underline">{{ words[0] }}</span>
+            </h3>
           </div>
           <div *ngIf="words.length > 1">
             <h5>Potential Words</h5>
