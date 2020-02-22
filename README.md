@@ -1,3 +1,6 @@
+![CI](https://github.com/bradtaniguchi/bomb-defuse-utils/workflows/CI/badge.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 # Bomb-defuse-utils
 
 This project provides a web-app that provide some basic utilities to help with the game
