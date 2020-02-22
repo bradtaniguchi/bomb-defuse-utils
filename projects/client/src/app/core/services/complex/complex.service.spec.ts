@@ -88,7 +88,7 @@ describe('complex', () => {
           wireHasBlue: true,
           wireHasRed: true
         },
-        expected: Instruction.B
+        expected: Instruction.S
       });
     });
   });
