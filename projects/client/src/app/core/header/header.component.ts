@@ -3,27 +3,54 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 @Component({
   selector: 'app-header',
   template: `
-    <header fxLayout="row" fxLayoutAlign="end">
-      <a routerLink="/" class="title" fxFlex="30">Bomb Defuse Utils</a>
-      <nav role="navigation" fxLayout="row" fxLayoutAlign="center">
-        <a class="app-button" routerLink="/search" routerLinkActive="active"
-          >Search</a
-        >
-        <a
-          class="app-button"
-          href="http://www.bombmanual.com/manual/1/html"
-          routerLinkActive="active"
-          >Manual</a
-        >
-        <a class="app-button" routerLink="/utils" routerLinkActive="active"
-          >Utils</a
-        >
-        <a
-          class="app-button"
-          href="https://github.com/bradtaniguchi/bomb-defuse-utils"
-          >Github</a
-        >
-      </nav>
+    <!-- nav template -->
+    <ng-template #nav>
+      <a
+        class="app-button"
+        routerLink="/search"
+        routerLinkActive="active"
+        (click)="showNav = false"
+        >Search</a
+      >
+      <a
+        class="app-button"
+        href="http://www.bombmanual.com/manual/1/html"
+        routerLinkActive="active"
+        (click)="showNav = false"
+        >Manual</a
+      >
+      <a
+        class="app-button"
+        routerLink="/utils"
+        routerLinkActive="active"
+        (click)="showNav = false"
+        >Utils</a
+      >
+      <a
+        class="app-button"
+        href="https://github.com/bradtaniguchi/bomb-defuse-utils"
+        (click)="showNav = false"
+        >Github</a
+      >
+    </ng-template>
+
+    <header fxLayout="row" style="margin-bottom: 64px">
+      <a routerLink="/" class="title" fxFlex.gt-sm="30" fxFlex="80"
+        >Bomb Defuse Utils</a
+      >
+      <span [fxShow.sm]="true" [fxShow.xs]="true" [fxShow]="false">
+        <button (click)="showNav = !showNav">
+          Nav Menu
+        </button>
+        <nav *ngIf="showNav" fxLayout="column" class="overlay">
+          <ng-container *ngTemplateOutlet="nav"></ng-container>
+        </nav>
+      </span>
+      <span fxShow.gt-sm="true" fxShow="false">
+        <nav role="navigation" fxLayout="row" fxLayoutAlign="center">
+          <ng-container *ngTemplateOutlet="nav"></ng-container>
+        </nav>
+      </span>
       <span fxFlex></span>
     </header>
   `,
@@ -32,11 +59,19 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
       .title {
         margin: 8px;
       }
+    `,
+    `
+      nav.overlay {
+        background-color: #fff;
+        position: absolute;
+        right: 4px;
+      }
     `
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
+  public showNav: boolean;
   constructor() {}
 
   ngOnInit() {}
