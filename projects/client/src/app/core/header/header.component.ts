@@ -18,6 +18,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
         <a class="app-button" routerLink="/utils" routerLinkActive="active"
           >Utils</a
         >
+        <a
+          class="app-button"
+          href="https://github.com/bradtaniguchi/bomb-defuse-utils"
+          >Github</a
+        >
       </nav>
       <span fxFlex></span>
     </header>
