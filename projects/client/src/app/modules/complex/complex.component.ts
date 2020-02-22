@@ -22,7 +22,8 @@ type GeneralParams = WireParams & GlobalWireParams;
     <form [formGroup]="form" novalidate>
       <div>
         <app-middle-layout>
-          <!-- other setings -->
+          <app-manual-link linkId="ComplicatedWires"></app-manual-link>
+          <!-- other settings -->
           <app-form-field>
             <label for="showInstructionalInputs"
               >Ask Instructional questions?</label
@@ -44,7 +45,7 @@ type GeneralParams = WireParams & GlobalWireParams;
               might need to ask more questions.
             </div>
           </app-form-field>
-          <ng-container *ngIf="(showInstructionalInputs$ | async)">
+          <ng-container *ngIf="showInstructionalInputs$ | async">
             <h3>
               Instructional Inputs
             </h3>
@@ -155,17 +156,17 @@ type GeneralParams = WireParams & GlobalWireParams;
             </select>
           </app-form-field>
           <ng-container
-            *ngIf="(showInstructionalInputs$ | async); else showInstruction"
+            *ngIf="showInstructionalInputs$ | async; else showInstruction"
           >
             <!-- if we are showing the instructional inputs, we show the "cutTheWire" observable
             -->
-            <app-answer-box *ngIf="(cutTheWire$ | async) as cutTheWire">
+            <app-answer-box *ngIf="cutTheWire$ | async as cutTheWire">
               {{ getCutTheWireDisplay(cutTheWire) }}
             </app-answer-box>
           </ng-container>
           <!-- TODO: add cut or not cut the wire -->
           <ng-template #showInstruction>
-            <app-answer-box *ngIf="(instruction$ | async) as instruction">
+            <app-answer-box *ngIf="instruction$ | async as instruction">
               {{ instruction }}
             </app-answer-box>
           </ng-template>
