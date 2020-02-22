@@ -6,6 +6,8 @@
 This project provides a web-app that provide some basic utilities to help with the game
 [Keep Talking and Nobody Explodes](https://keeptalkinggame.com). The web app is available at https://bradtaniguchi.github.io/bomb-defuse-utils/
 
+![example screenshot](../assets/bomb-defuse-util-screenshot-1.png)
+
 # Developing
 
 This project uses Angular and the Angular-cli
