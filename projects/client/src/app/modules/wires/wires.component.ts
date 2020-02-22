@@ -126,10 +126,10 @@ export class WiresComponent implements OnInit {
   }
 
   private observeWireToCut(): Observable<number> {
-    return combineLatest(
+    return combineLatest([
       this.form.get('wires').valueChanges,
       this.form.get('isSerialOdd').valueChanges.pipe(startWith(false))
-    ).pipe(
+    ]).pipe(
       map(([wires, isSerialOdd]: [WireColor[], boolean]) =>
         this.wiresService.getWireToCut(wires, isSerialOdd)
       )
