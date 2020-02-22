@@ -37,9 +37,7 @@
               "projects/client/src/robots.txt",
               "projects/client/src/assets"
             ],
-            "styles": [
-              "projects/client/src/styles.scss"
-            ],
+            "styles": ["projects/client/src/styles.scss"],
             "scripts": [],
             "es5BrowserSupport": true
           },
@@ -71,7 +69,8 @@
                   "type": "anyComponentStyle",
                   "maximumWarning": "6kb"
                 }
-              ]
+              ],
+              "serviceWorker": true
             }
           }
         },
@@ -105,9 +104,7 @@
               "projects/client/tsconfig.app.json",
               "projects/client/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
