@@ -54,6 +54,15 @@ export const routes: SearchRoutes = [
     tags: ['memory', 'numbers', 'display', '4', '5', 'four', 'five']
   },
   {
+    path: 'simon',
+    loadChildren: () =>
+      import('./modules/simon-says/simon-says.module').then(
+        m => m.SimonSaysModule
+      ),
+    title: 'On the Subject of Simon Says',
+    tags: ['simon', '4', 'four', 'red', 'green', 'yellow', 'blue']
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'search',
