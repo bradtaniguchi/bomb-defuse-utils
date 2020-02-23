@@ -12,7 +12,7 @@ import { HeaderModule } from './core/header/header.module';
     BrowserModule,
     AppRoutingModule,
     HeaderModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
+    ServiceWorkerModule.register('/bomb-defuse-utils/ngsw-worker.js', {
       enabled: environment.production
     })
   ],
