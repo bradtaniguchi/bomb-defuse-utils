@@ -13,31 +13,45 @@ export type SearchRoutes = SearchRoute[];
 export const routes: SearchRoutes = [
   {
     path: 'complex',
-    loadChildren: () => import('./modules/complex/complex.module').then(m => m.ComplexModule),
+    loadChildren: () =>
+      import('./modules/complex/complex.module').then(m => m.ComplexModule),
     title: 'On the Subject of Complicated Wires',
     tags: ['wires', 'star', 'LED', 'red', 'blue', 'vertical', 'cut', 'multiple']
   },
   {
     path: 'search',
-    loadChildren: () => import('./modules/search/search.module').then(m => m.SearchModule),
+    loadChildren: () =>
+      import('./modules/search/search.module').then(m => m.SearchModule),
     exclude: true
   },
   {
     path: 'wires',
-    loadChildren: () => import('./modules/wires/wires.module').then(m => m.WiresModule),
+    loadChildren: () =>
+      import('./modules/wires/wires.module').then(m => m.WiresModule),
     title: 'On the Subject of Wires',
     tags: ['wires', 'top', 'bottom', 'cut', 'one', '3', '4', '5', '6']
   },
   {
     path: 'passwords',
-    loadChildren: () => import('./modules/passwords/passwords.module').then(m => m.PasswordsModule),
+    loadChildren: () =>
+      import('./modules/passwords/passwords.module').then(
+        m => m.PasswordsModule
+      ),
     title: 'On the Subject of Passwords',
     tags: ['letters', 'words', 'dials', '5', 'five', 'grid', 'guess']
   },
   {
     path: 'utils',
-    loadChildren: () => import('./modules/utils/utils.module').then(m => m.UtilsModule),
+    loadChildren: () =>
+      import('./modules/utils/utils.module').then(m => m.UtilsModule),
     exclude: true
+  },
+  {
+    path: 'memory',
+    loadChildren: () =>
+      import('./modules/memory/memory.module').then(m => m.MemoryModule),
+    title: 'On the Subject Memory',
+    tags: ['memory', 'numbers', 'display', '4', '5', 'four', 'five']
   },
   {
     path: '',
