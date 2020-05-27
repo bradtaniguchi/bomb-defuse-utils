@@ -21,6 +21,8 @@ export class GoogleAnalyticsService {
     this.document.body.appendChild(scriptElement);
     const win = window as Window & any;
     win.dataLayer = win.dataLayer || [];
+
+    // tslint:disable-next-line: only-arrow-functions
     win.gtag = function () {
       win.dataLayer.push(arguments);
     };
