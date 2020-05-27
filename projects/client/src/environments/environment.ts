@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  // TODO: remove later, not suppose to be supported
+  gtagCode: 'UA-96613226-5'
 };
 
 /*
