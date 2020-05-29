@@ -14,74 +14,90 @@ export const routes: SearchRoutes = [
   {
     path: 'complex',
     loadChildren: () =>
-      import('./modules/complex/complex.module').then(m => m.ComplexModule),
+      import('./modules/complex/complex.module').then((m) => m.ComplexModule),
     title: 'On the Subject of Complicated Wires',
-    tags: ['wires', 'star', 'LED', 'red', 'blue', 'vertical', 'cut', 'multiple']
+    tags: [
+      'wires',
+      'star',
+      'LED',
+      'red',
+      'blue',
+      'vertical',
+      'cut',
+      'multiple',
+    ],
   },
   {
     path: 'search',
     loadChildren: () =>
-      import('./modules/search/search.module').then(m => m.SearchModule),
-    exclude: true
+      import('./modules/search/search.module').then((m) => m.SearchModule),
+    exclude: true,
   },
   {
     path: 'wires',
     loadChildren: () =>
-      import('./modules/wires/wires.module').then(m => m.WiresModule),
+      import('./modules/wires/wires.module').then((m) => m.WiresModule),
     title: 'On the Subject of Wires',
-    tags: ['wires', 'top', 'bottom', 'cut', 'one', '3', '4', '5', '6']
+    tags: ['wires', 'top', 'bottom', 'cut', 'one', '3', '4', '5', '6'],
   },
   {
     path: 'passwords',
     loadChildren: () =>
       import('./modules/passwords/passwords.module').then(
-        m => m.PasswordsModule
+        (m) => m.PasswordsModule
       ),
     title: 'On the Subject of Passwords',
-    tags: ['letters', 'words', 'dials', '5', 'five', 'grid', 'guess']
+    tags: ['letters', 'words', 'dials', '5', 'five', 'grid', 'guess'],
   },
   {
     path: 'utils',
     loadChildren: () =>
-      import('./modules/utils/utils.module').then(m => m.UtilsModule),
-    exclude: true
+      import('./modules/utils/utils.module').then((m) => m.UtilsModule),
+    exclude: true,
   },
   {
     path: 'memory',
     loadChildren: () =>
-      import('./modules/memory/memory.module').then(m => m.MemoryModule),
+      import('./modules/memory/memory.module').then((m) => m.MemoryModule),
     title: 'On the Subject Memory',
-    tags: ['memory', 'numbers', 'display', '4', '5', 'four', 'five']
+    tags: ['memory', 'numbers', 'display', '4', '5', 'four', 'five'],
   },
   {
     path: 'simon',
     loadChildren: () =>
       import('./modules/simon-says/simon-says.module').then(
-        m => m.SimonSaysModule
+        (m) => m.SimonSaysModule
       ),
     title: 'On the Subject of Simon Says',
-    tags: ['simon', '4', 'four', 'red', 'green', 'yellow', 'blue']
+    tags: ['simon', '4', 'four', 'red', 'green', 'yellow', 'blue'],
+  },
+  {
+    path: 'notepad',
+    loadChildren: () =>
+      import('./modules/notepad/notepad.module').then((m) => m.NotepadModule),
+    title: 'Notepad',
+    tags: ['util', 'module', 'helper'],
   },
   {
     path: '',
     pathMatch: 'full',
     redirectTo: 'search',
-    exclude: true
+    exclude: true,
   },
   {
     path: '**',
     pathMatch: 'full',
     redirectTo: 'search',
-    exclude: true
-  }
+    exclude: true,
+  },
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-      useHash: true
-    })
+      useHash: true,
+    }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
