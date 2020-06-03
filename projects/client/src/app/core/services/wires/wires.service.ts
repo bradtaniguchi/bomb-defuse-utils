@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { WireColor } from '../../models/wire';
-import { logger } from '../../logger';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,7 @@ export class WiresService {
    * Returns if we need to ask for the oddSerial, based upon the current wires.
    */
   public needIsSerialOdd(wires: WireColor[]): boolean {
-    switch (WiresService.length) {
+    switch (wires.length) {
       case 3:
         return false;
       case 4:

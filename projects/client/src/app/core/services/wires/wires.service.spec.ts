@@ -2,6 +2,52 @@ import { WiresService } from './wires.service';
 
 describe('wires', () => {
   const wires = new WiresService();
+  describe('needIsSerialOdd', () => {
+    test('returns false for 3 wires', () =>
+      expect(wires.needIsSerialOdd(['blue', 'blue', 'blue'])).toEqual(false));
+
+    describe('four wires:', () => {
+      test('returns true if more than 1 red wire', () =>
+        expect(wires.needIsSerialOdd(['blue', 'white', 'red', 'red'])).toEqual(
+          true
+        ));
+      test('returns false if no red wires', () =>
+        expect(
+          wires.needIsSerialOdd(['blue', 'white', 'blue', 'blue'])
+        ).toEqual(false));
+    });
+    describe('five wires:', () => {
+      test('returns true if last wire is black', () =>
+        expect(
+          wires.needIsSerialOdd(['red', 'blue', 'black', 'white', 'black'])
+        ).toEqual(true));
+      test('returns false if the last wire is not black', () =>
+        expect(
+          wires.needIsSerialOdd(['red', 'blue', 'black', 'white', 'blue'])
+        ).toEqual(false));
+      test('returns false if all wires but the last are black', () =>
+        expect(
+          wires.needIsSerialOdd(['black', 'black', 'black', 'black', 'blue'])
+        ).toEqual(false));
+    });
+    describe('six wires:', () => {
+      test('returns true if there are no yellow wires', () =>
+        expect(
+          wires.needIsSerialOdd(['red', 'blue', 'red', 'blue', 'red', 'blue'])
+        ).toEqual(true));
+      test('returns false if there are yellow wires', () =>
+        expect(
+          wires.needIsSerialOdd([
+            'red',
+            'blue',
+            'red',
+            'blue',
+            'yellow',
+            'blue',
+          ])
+        ).toEqual(false));
+    });
+  });
   describe('three wires: ', () => {
     test('If there are no red wires, cut the second wire.', () => {
       expect(wires.getWireToCut(['blue', 'white', 'yellow'])).toEqual(2);
