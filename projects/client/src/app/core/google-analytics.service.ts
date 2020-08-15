@@ -8,7 +8,7 @@ import { filter } from 'rxjs/operators';
 declare var gtag: any;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GoogleAnalyticsService {
   constructor(
@@ -22,8 +22,7 @@ export class GoogleAnalyticsService {
     const win = window as Window & any;
     win.dataLayer = win.dataLayer || [];
 
-    // tslint:disable-next-line: only-arrow-functions
-    win.gtag = function () {
+    win.gtag = () => {
       win.dataLayer.push(arguments);
     };
     gtag('js', new Date());
