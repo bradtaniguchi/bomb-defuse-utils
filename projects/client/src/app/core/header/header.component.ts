@@ -14,7 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
       >
       <a
         class="app-button"
-        href="http://www.bombmanual.com/manual/1/html"
+        href="https://www.bombmanual.com/web/index.html"
         routerLinkActive="active"
         (click)="showNav = false"
         >Manual</a
