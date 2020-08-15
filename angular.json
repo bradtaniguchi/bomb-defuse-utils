@@ -37,9 +37,10 @@
               "projects/client/src/robots.txt",
               "projects/client/src/assets"
             ],
-            "styles": ["projects/client/src/styles.scss"],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "styles": [
+              "projects/client/src/styles.scss"
+            ],
+            "scripts": []
           },
           "configurations": {
             "production": {
