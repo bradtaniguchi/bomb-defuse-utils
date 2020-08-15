@@ -12,11 +12,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
         (click)="showNav = false"
         >Search</a
       >
-      <a
-        class="app-button"
-        href="https://www.bombmanual.com/web/index.html"
-        routerLinkActive="active"
-        (click)="showNav = false"
+      <a class="app-button" href="https://www.bombmanual.com/web/index.html"
         >Manual</a
       >
       <a
@@ -28,8 +24,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
       >
       <a
         class="app-button"
-        href="https://github.com/bradtaniguchi/bomb-defuse-utils"
-        (click)="showNav = false"
+        href="http://github.com/bradtaniguchi/bomb-defuse-utils"
         >Github</a
       >
     </ng-template>
@@ -66,9 +61,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
         position: absolute;
         right: 4px;
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
   public showNav: boolean;
