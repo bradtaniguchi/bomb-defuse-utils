@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "build:prod": "ng build --prod",
-    "publish": "node tools/build.js",
+    "publish": "node tools/publish.js",
     "smoke": "node tools/smoke.js",
     "clean": "npx rimraf dist",
     "test": "ng test",
