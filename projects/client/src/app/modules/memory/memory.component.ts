@@ -8,13 +8,13 @@ import {
   startWith,
   switchMap,
   take,
-  tap
+  tap,
 } from 'rxjs/operators';
 import { logger } from '../../core/logger';
 import {
   MemoryAction,
   MemoryPrompt,
-  MemoryService
+  MemoryService,
 } from '../../core/services/memory/memory.service';
 
 @Component({
@@ -43,9 +43,7 @@ import {
             <div class="margin">
               <h3>Stage: {{ index + 1 }}</h3>
               <app-form-field>
-                <label>
-                  Location Selected
-                </label>
+                <label> Location Selected </label>
                 <input
                   type="number"
                   placeholder="The location of the button selected"
@@ -56,9 +54,7 @@ import {
                 />
               </app-form-field>
               <app-form-field>
-                <label>
-                  Number selected
-                </label>
+                <label> Number selected </label>
                 <input
                   type="number"
                   appFormInput
@@ -98,7 +94,7 @@ import {
     </form>
   `,
   styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MemoryComponent implements OnInit {
   public form$ = new ReplaySubject<FormGroup>(1);
@@ -118,16 +114,16 @@ export class MemoryComponent implements OnInit {
 
   private createFormGroup() {
     return this.fb.group({
-      actions: this.fb.array([this.buildMemoryAction()])
+      actions: this.fb.array([this.buildMemoryAction()]),
     });
   }
   private getActions$(form$: Observable<FormGroup>) {
     return form$.pipe(
-      map(form => form.get('actions') as FormArray),
-      tap(val => logger.log('debug', val)),
-      mergeMap(formArray =>
+      map((form) => form.get('actions') as FormArray),
+      tap((val) => logger.log('debug 1', val)),
+      mergeMap((formArray) =>
         formArray.valueChanges.pipe(
-          startWith(),
+          startWith(null),
           map(() => formArray.controls)
         )
       )
@@ -135,23 +131,23 @@ export class MemoryComponent implements OnInit {
   }
   private getPrompts$(actions$: Observable<FormGroup[]>) {
     return actions$.pipe(
-      // tap(() => ),
-      switchMap(controls =>
-        combineLatest(controls.map(control => this.getControlValue$(control)))
+      tap((actions) => logger.log('test with prompts', actions)),
+      switchMap((controls) =>
+        combineLatest(controls.map((control) => this.getControlValue$(control)))
       ),
-      tap(controls => logger.log('getPrompts, controls', controls)),
-      map(previousActions => this.memoryService.getPrompts(previousActions)),
-      tap(prompts => logger.log('prompts', prompts))
+      tap((controls) => logger.log('getPrompts, controls', controls)),
+      map((previousActions) => this.memoryService.getPrompts(previousActions)),
+      tap((prompts) => logger.log('prompts', prompts))
     );
   }
   private getControlValue$(control: FormGroup): Observable<MemoryAction> {
     return control.valueChanges.pipe(startWith(control.value));
   }
   private getShowNextStage$(actions$: Observable<FormGroup[]>) {
-    return actions$.pipe(map(action => action.length < 4));
+    return actions$.pipe(map((action) => action.length < 4));
   }
   private getShowRemove$(actions$: Observable<FormGroup[]>) {
-    return actions$.pipe(map(actions => actions.length > 0));
+    return actions$.pipe(map((actions) => actions.length > 0));
   }
 
   public getActions(form: FormGroup) {
@@ -168,7 +164,7 @@ export class MemoryComponent implements OnInit {
   public nextStage() {
     this.form$
       .pipe(
-        map(form => form.get('actions')),
+        map((form) => form.get('actions')),
         take(1),
         filter((actionsFormArray: FormArray) => actionsFormArray.length < 4)
       )
@@ -180,7 +176,7 @@ export class MemoryComponent implements OnInit {
   public remove() {
     this.form$
       .pipe(
-        map(form => form.get('actions')),
+        map((form) => form.get('actions')),
         take(1),
         filter((actionsFormArray: FormArray) => !!actionsFormArray.length)
       )
@@ -194,13 +190,13 @@ export class MemoryComponent implements OnInit {
       position: this.fb.control(0, [
         Validators.required,
         Validators.min(0),
-        Validators.max(4)
+        Validators.max(4),
       ]),
       label: this.fb.control(0, [
         Validators.required,
         Validators.min(0),
-        Validators.max(9)
-      ])
+        Validators.max(9),
+      ]),
     });
   }
 }
