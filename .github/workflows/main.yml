@@ -4,20 +4,23 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js 16
-      uses: actions/setup-node@v1
-      with:
-        node-version: 16.13
-    - name: Install dependencies
-      run: npm ci
-    - name: Lint
-      run: npm run lint
-    - name: Test
-      run: npm run test
-    - name: Build
-      run: npm run build:prod
+      - uses: actions/checkout@v1
+      - name: Use Node.js 16
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.13
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Test
+        run: npm run test
+      - name: Build
+        run: npm run build:prod
+      - name: Deploy
+        # only execute if on main branch, and not PR
+        if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+        run: npm run publish
