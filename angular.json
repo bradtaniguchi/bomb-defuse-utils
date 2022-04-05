@@ -100,16 +100,6 @@
           "options": {
             "tsConfig": "tsconfig.spec.json"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/client/tsconfig.app.json",
-              "projects/client/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
-          }
         }
       }
     }

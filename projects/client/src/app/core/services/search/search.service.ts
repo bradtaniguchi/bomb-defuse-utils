@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
-import * as Fuse from 'fuse.js';
+import Fuse from 'fuse.js';
 import { routes } from '../../../app-routing.module';
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SearchService {
-  private readonly routes = routes.filter(route => !route.exclude);
+  private readonly routes = routes.filter((route) => !route.exclude);
   constructor() {}
 
   public search(search: string): any {
     const fuse = new Fuse(this.routes, {
-      keys: ['title', 'tags']
+      keys: ['title', 'tags'],
     });
     return fuse.search(search);
   }
