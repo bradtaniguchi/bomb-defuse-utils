@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { combineLatest, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { WireColor } from '../../core/models/wire';
@@ -68,7 +68,7 @@ import { WiresService } from '../../core/services/wires/wires.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WiresComponent implements OnInit {
-  public form: FormGroup;
+  public form: UntypedFormGroup;
   public readonly wireOptions: WireColor[] = [
     'black',
     'blue',
@@ -79,7 +79,7 @@ export class WiresComponent implements OnInit {
   public wireToCut$: Observable<number>;
   public dontUseSerial$: Observable<boolean>;
   public showSecondQuestions$: Observable<boolean>;
-  constructor(private fb: FormBuilder, private wiresService: WiresService) {}
+  constructor(private fb: UntypedFormBuilder, private wiresService: WiresService) {}
 
   ngOnInit() {
     this.form = this.buildForm();
@@ -89,7 +89,7 @@ export class WiresComponent implements OnInit {
     this.dontUseSerial$ = this.observeDontUseSerial();
   }
 
-  private buildForm(): FormGroup {
+  private buildForm(): UntypedFormGroup {
     return this.fb.group({
       num: this.fb.control(null, [Validators.min(3), Validators.max(6)]),
       wires: this.fb.array([]),
@@ -117,7 +117,7 @@ export class WiresComponent implements OnInit {
       const controls = new Array(num)
         .fill(null)
         .map(() => this.fb.control('white' as WireColor));
-      const formArray = this.form.get('wires') as FormArray;
+      const formArray = this.form.get('wires') as UntypedFormArray;
       while (formArray.length !== 0) {
         formArray.removeAt(0);
       }

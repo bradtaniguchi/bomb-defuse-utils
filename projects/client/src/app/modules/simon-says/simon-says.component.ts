@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Observable, ReplaySubject } from 'rxjs';
 import { SimonSaysService } from '../../core/services/simon-says/simon-says.service';
 import { startWith, map, mergeMap, switchMap } from 'rxjs/operators';
@@ -49,10 +49,10 @@ import { startWith, map, mergeMap, switchMap } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SimonSaysComponent implements OnInit {
-  public form$ = new ReplaySubject<FormGroup>(1);
+  public form$ = new ReplaySubject<UntypedFormGroup>(1);
   public pattern$: Observable<string>;
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private simonSaysService: SimonSaysService
   ) {}
 
@@ -73,7 +73,7 @@ export class SimonSaysComponent implements OnInit {
     });
   }
 
-  private getPattern$(form$: Observable<FormGroup>) {
+  private getPattern$(form$: Observable<UntypedFormGroup>) {
     return form$.pipe(
       switchMap(form =>
         form.valueChanges.pipe(

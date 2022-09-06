@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
-  FormArray,
-  FormBuilder,
-  FormGroup,
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormGroup,
   Validators
 } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -66,10 +66,10 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PasswordsComponent implements OnInit {
-  public form: FormGroup;
+  public form: UntypedFormGroup;
   public words$: Observable<string[]>;
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private passwordsService: PasswordsService
   ) {}
 
@@ -79,10 +79,10 @@ export class PasswordsComponent implements OnInit {
   }
 
   public getPasswordControls(): AbstractControl[] {
-    return (this.form.get('positions') as FormArray).controls;
+    return (this.form.get('positions') as UntypedFormArray).controls;
   }
 
-  private buildForm(): FormGroup {
+  private buildForm(): UntypedFormGroup {
     const positions = new Array(5)
       .fill(null)
       .map(() =>
@@ -93,7 +93,7 @@ export class PasswordsComponent implements OnInit {
     });
   }
 
-  private observeWords(form: FormGroup): Observable<string[]> {
+  private observeWords(form: UntypedFormGroup): Observable<string[]> {
     return form.get('positions').valueChanges.pipe(
       map((combinationStrings: string[]) =>
         combinationStrings.map(combinationString => combinationString.split(''))

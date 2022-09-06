@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Observable, ReplaySubject, combineLatest } from 'rxjs';
 import {
   filter,
@@ -97,12 +97,12 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MemoryComponent implements OnInit {
-  public form$ = new ReplaySubject<FormGroup>(1);
-  public actions$: Observable<FormGroup[]>;
+  public form$ = new ReplaySubject<UntypedFormGroup>(1);
+  public actions$: Observable<UntypedFormGroup[]>;
   public prompts$: Observable<MemoryPrompt[]>;
   public showNextStage$: Observable<boolean>;
   public showRemove$: Observable<boolean>;
-  constructor(private fb: FormBuilder, private memoryService: MemoryService) {}
+  constructor(private fb: UntypedFormBuilder, private memoryService: MemoryService) {}
 
   ngOnInit(): void {
     this.form$.next(this.createFormGroup());
@@ -117,9 +117,9 @@ export class MemoryComponent implements OnInit {
       actions: this.fb.array([this.buildMemoryAction()]),
     });
   }
-  private getActions$(form$: Observable<FormGroup>) {
+  private getActions$(form$: Observable<UntypedFormGroup>) {
     return form$.pipe(
-      map((form) => form.get('actions') as FormArray),
+      map((form) => form.get('actions') as UntypedFormArray),
       tap((val) => logger.log('debug 1', val)),
       mergeMap((formArray) =>
         formArray.valueChanges.pipe(
@@ -127,9 +127,9 @@ export class MemoryComponent implements OnInit {
           map(() => formArray.controls)
         )
       )
-    ) as Observable<FormGroup[]>;
+    ) as Observable<UntypedFormGroup[]>;
   }
-  private getPrompts$(actions$: Observable<FormGroup[]>) {
+  private getPrompts$(actions$: Observable<UntypedFormGroup[]>) {
     return actions$.pipe(
       tap((actions) => logger.log('test with prompts', actions)),
       switchMap((controls) =>
@@ -140,18 +140,18 @@ export class MemoryComponent implements OnInit {
       tap((prompts) => logger.log('prompts', prompts))
     );
   }
-  private getControlValue$(control: FormGroup): Observable<MemoryAction> {
+  private getControlValue$(control: UntypedFormGroup): Observable<MemoryAction> {
     return control.valueChanges.pipe(startWith(control.value));
   }
-  private getShowNextStage$(actions$: Observable<FormGroup[]>) {
+  private getShowNextStage$(actions$: Observable<UntypedFormGroup[]>) {
     return actions$.pipe(map((action) => action.length < 4));
   }
-  private getShowRemove$(actions$: Observable<FormGroup[]>) {
+  private getShowRemove$(actions$: Observable<UntypedFormGroup[]>) {
     return actions$.pipe(map((actions) => actions.length > 0));
   }
 
-  public getActions(form: FormGroup) {
-    return (form.get('actions') as FormArray).controls as FormGroup[];
+  public getActions(form: UntypedFormGroup) {
+    return (form.get('actions') as UntypedFormArray).controls as UntypedFormGroup[];
   }
 
   public clear() {
@@ -166,9 +166,9 @@ export class MemoryComponent implements OnInit {
       .pipe(
         map((form) => form.get('actions')),
         take(1),
-        filter((actionsFormArray: FormArray) => actionsFormArray.length < 4)
+        filter((actionsFormArray: UntypedFormArray) => actionsFormArray.length < 4)
       )
-      .subscribe((actionsFormArray: FormArray) =>
+      .subscribe((actionsFormArray: UntypedFormArray) =>
         actionsFormArray.push(this.buildMemoryAction())
       );
   }
@@ -178,9 +178,9 @@ export class MemoryComponent implements OnInit {
       .pipe(
         map((form) => form.get('actions')),
         take(1),
-        filter((actionsFormArray: FormArray) => !!actionsFormArray.length)
+        filter((actionsFormArray: UntypedFormArray) => !!actionsFormArray.length)
       )
-      .subscribe((actionsFormArray: FormArray) =>
+      .subscribe((actionsFormArray: UntypedFormArray) =>
         actionsFormArray.removeAt(actionsFormArray.length - 1)
       );
   }

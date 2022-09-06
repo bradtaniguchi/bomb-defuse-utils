@@ -4,7 +4,7 @@ import {
   OnInit,
   OnDestroy
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { map, shareReplay, startWith, takeUntil } from 'rxjs/operators';
 import { logger } from '../../core/logger';
@@ -189,14 +189,14 @@ type GeneralParams = WireParams & GlobalWireParams;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComplexComponent implements OnInit, OnDestroy {
-  public form: FormGroup;
+  public form: UntypedFormGroup;
   public showInstructionalInputs$: Observable<boolean>;
   public instruction$: Observable<Instruction>;
   public cutTheWire$: Observable<boolean>;
 
   private takeUntil = new Subject();
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private complexService: ComplexService
   ) {}
 
@@ -218,7 +218,7 @@ export class ComplexComponent implements OnInit, OnDestroy {
     return cutTheWire ? Instruction.C : Instruction.D;
   }
 
-  public clearForm(form: FormGroup) {
+  public clearForm(form: UntypedFormGroup) {
     logger.log('clearing form');
     form.patchValue({
       wireHasRed: null,
@@ -228,7 +228,7 @@ export class ComplexComponent implements OnInit, OnDestroy {
     });
   }
 
-  private buildForm(): FormGroup {
+  private buildForm(): UntypedFormGroup {
     return this.fb.group({
       // use instructional questions
       showInstructionalInputs: this.fb.control(false, []),
@@ -244,7 +244,7 @@ export class ComplexComponent implements OnInit, OnDestroy {
     });
   }
 
-  private observeShowInstructionalInputs(form: FormGroup): Observable<boolean> {
+  private observeShowInstructionalInputs(form: UntypedFormGroup): Observable<boolean> {
     return form.valueChanges.pipe(
       map(formValue => !!formValue.showInstructionalInputs),
       startWith(false)
@@ -252,7 +252,7 @@ export class ComplexComponent implements OnInit, OnDestroy {
   }
 
   private observeInstruction(
-    form: FormGroup
+    form: UntypedFormGroup
   ): Observable<Instruction | undefined> {
     return form.valueChanges.pipe(
       map((wireParams: WireParams) =>
@@ -263,7 +263,7 @@ export class ComplexComponent implements OnInit, OnDestroy {
     );
   }
 
-  private observeCutTheWire(form: FormGroup): Observable<boolean> {
+  private observeCutTheWire(form: UntypedFormGroup): Observable<boolean> {
     return form.valueChanges.pipe(
       map((params: GeneralParams) => {
         const isWireParams = this.complexService.isWireParams(params);

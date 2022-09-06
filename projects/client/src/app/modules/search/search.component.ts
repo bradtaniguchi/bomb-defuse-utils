@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Form, FormGroup, FormBuilder } from '@angular/forms';
+import { Form, UntypedFormGroup, UntypedFormBuilder } from '@angular/forms';
 import { SearchRoutes } from '../../app-routing.module';
 import { Observable } from 'rxjs';
 import { map, debounceTime } from 'rxjs/operators';
@@ -44,29 +44,29 @@ import { SearchService } from '../../core/services/search/search.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent implements OnInit {
-  public form: FormGroup;
+  public form: UntypedFormGroup;
   public search: string;
   public results$: Observable<SearchRoutes>;
-  constructor(private fb: FormBuilder, private searchService: SearchService) {}
+  constructor(private fb: UntypedFormBuilder, private searchService: SearchService) {}
 
   ngOnInit() {
     this.form = this.buildForm();
     this.results$ = this.observeResults(this.form);
   }
 
-  private buildForm(): FormGroup {
+  private buildForm(): UntypedFormGroup {
     return this.fb.group({
       search: this.fb.control('', [])
     });
   }
 
-  private observeResults(form: FormGroup): Observable<SearchRoutes> {
+  private observeResults(form: UntypedFormGroup): Observable<SearchRoutes> {
     return form.get('search').valueChanges.pipe(
       debounceTime(100),
       map(search => this.searchService.search(search))
     );
   }
-  public onSubmit(form: FormGroup) {
+  public onSubmit(form: UntypedFormGroup) {
     console.log('test in form:', form);
     // TODO: "go-to" the first link shown, add later
   }
