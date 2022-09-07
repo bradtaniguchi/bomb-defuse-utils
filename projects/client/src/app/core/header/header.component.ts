@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -34,9 +34,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
         >Bomb Defuse Utils</a
       >
       <span [fxShow.sm]="true" [fxShow.xs]="true" [fxShow]="false">
-        <button (click)="showNav = !showNav">
-          Nav Menu
-        </button>
+        <button (click)="showNav = !showNav">Nav Menu</button>
         <nav *ngIf="showNav" fxLayout="column" class="overlay">
           <ng-container *ngTemplateOutlet="nav"></ng-container>
         </nav>
@@ -65,9 +63,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   public showNav: boolean;
-  constructor() {}
-
-  ngOnInit() {}
 }

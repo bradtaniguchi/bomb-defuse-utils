@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-manual-link',
@@ -16,11 +11,8 @@ import {
     </a>
   `,
   styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ManualLinkComponent implements OnInit {
+export class ManualLinkComponent {
   @Input() linkId: string;
-  constructor() {}
-
-  ngOnInit(): void {}
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { LocalStorageService } from '../../core/services/local-storage/local-storage.service';
 
 @Component({
@@ -21,16 +21,11 @@ import { LocalStorageService } from '../../core/services/local-storage/local-sto
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NotepadComponent implements OnInit {
+export class NotepadComponent {
   public data: string = this.localStorageService.get();
   constructor(private localStorageService: LocalStorageService) {}
 
-  ngOnInit(): void {}
-
   public onKeyup() {
     console.log('data', this.data);
-    // this.localStorageService.save({
-    //   data: this.data,
-    // });
   }
 }

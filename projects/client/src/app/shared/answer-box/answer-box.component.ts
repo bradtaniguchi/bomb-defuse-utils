@@ -1,10 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-answer-box',
-  template: `
-    <ng-content></ng-content>
-  `,
+  template: ` <ng-content></ng-content> `,
   styles: [
     `
       :host {
@@ -14,12 +12,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
         padding: 8px 4px;
         border-radius: 4px;
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AnswerBoxComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class AnswerBoxComponent {}

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-form-field',
@@ -14,12 +14,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
         display: flex;
         justify-content: center;
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormFieldComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class FormFieldComponent {}

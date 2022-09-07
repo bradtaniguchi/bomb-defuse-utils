@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-middle-layout',
@@ -12,8 +12,5 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MiddleLayoutComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
+export class MiddleLayoutComponent {
 }
